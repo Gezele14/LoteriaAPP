@@ -31,8 +31,8 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      require("./src/assets/images/robot-dev.png"),
-      require("./src/assets/images/robot-prod.png")
+      require("./src/assets/images/background.png"),
+      require("./src/assets/images/logo.png"),
     ]),
     Font.loadAsync({
       ...Ionicons.font,

@@ -3,7 +3,8 @@ import { Platform } from "react-native";
 import { createStackNavigator } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-import Home from "../screens/Login";
+import Login from "../screens/Login";
+import SingUp from "../screens/SingUp";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -13,6 +14,7 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Login: Login,
+    SingUp: SingUp
   },
   {
     defaultNavigationOptions: {
