@@ -23,6 +23,8 @@ import Colors from "../constants/Colors";
 import bgimage from "../assets/images/background.png";
 import logo from "../assets/images/logo.png";
 
+import AppNavigator from "../navigation/AppNavigator";
+
 const { width: WIDTH } = Dimensions.get("window");
 
 export default class Login extends React.Component {
@@ -30,6 +32,7 @@ export default class Login extends React.Component {
     super(props);
 
     this.state = {
+      acces: false,
       showPass: true,
       press: false,
       loading: false,
@@ -37,6 +40,10 @@ export default class Login extends React.Component {
       pass: ""
     };
   }
+
+  login = () => {
+    this.setState({ acces: true });
+  };
 
   searchUsr = () => {
     if (this.state.ced == "" || this.state.pass == "") {
@@ -87,93 +94,101 @@ export default class Login extends React.Component {
   };
 
   render() {
-    return (
-      <ImageBackground source={bgimage} style={styles.backgroundContainer}>
-        <KeyboardAvoidingView style = {styles.container} behavior="padding" enabled>
-          <View style={styles.logoContainer}>
-            <Image source={logo} />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Icon
-              name={"ios-person"}
-              size={28}
-              color={"rgba(255, 255, 255, 0.7)"}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={(ced) => this.setState({ ced })}
-              placeholder={"Cédula"}
-              keyboardType="number-pad"
-              placeholderTextColor={"rgba(172, 187, 194, 0.45)"}
-              underlineColorAndroid="transparent"
-              onSubmitEditing={() => this.password.focus()}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Icon
-              name={"ios-lock"}
-              size={28}
-              color={"rgba(255, 255, 255, 0.7)"}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={(pass) => this.setState({ pass })}
-              placeholder={"Contraseña"}
-              keyboardType="twitter"
-              secureTextEntry={this.state.showPass}
-              placeholderTextColor={"rgba(172, 187, 194, 0.45)"}
-              underlineColorAndroid="transparent"
-              ref={(pass) => (this.password = pass)}
-            />
-            <TouchableOpacity
-              style={styles.btnEye}
-              onPress={this.showPass.bind(this)}
-            >
-              <Icon
-                name={this.state.press == false ? "ios-eye" : "ios-eye-off"}
-                size={26}
-                color={"rgba(255, 255, 255, 0.45)"}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity
-            style={styles.btnLogin}
-            onPress={() => this.searchUsr()}
+    if (this.state.acces) {
+      return <AppNavigator />;
+    } else {
+      return (
+        <ImageBackground source={bgimage} style={styles.backgroundContainer}>
+          <KeyboardAvoidingView
+            style={styles.container}
+            behavior="padding"
+            enabled
           >
-            <Text style={styles.text}> Login </Text>
-          </TouchableOpacity>
+            <View style={styles.logoContainer}>
+              <Image source={logo} />
+            </View>
 
-          <View style={styles.regContainer}>
-            <Text style={styles.textReg}>¿No tienes tu cuenta aun?</Text>
+            <View style={styles.inputContainer}>
+              <Icon
+                name={"ios-person"}
+                size={28}
+                color={"rgba(255, 255, 255, 0.7)"}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(ced) => this.setState({ ced })}
+                placeholder={"Cédula"}
+                keyboardType="number-pad"
+                placeholderTextColor={"rgba(172, 187, 194, 0.45)"}
+                underlineColorAndroid="transparent"
+                onSubmitEditing={() => this.password.focus()}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Icon
+                name={"ios-lock"}
+                size={28}
+                color={"rgba(255, 255, 255, 0.7)"}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(pass) => this.setState({ pass })}
+                placeholder={"Contraseña"}
+                keyboardType="twitter"
+                secureTextEntry={this.state.showPass}
+                placeholderTextColor={"rgba(172, 187, 194, 0.45)"}
+                underlineColorAndroid="transparent"
+                ref={(pass) => (this.password = pass)}
+              />
+              <TouchableOpacity
+                style={styles.btnEye}
+                onPress={this.showPass.bind(this)}
+              >
+                <Icon
+                  name={this.state.press == false ? "ios-eye" : "ios-eye-off"}
+                  size={26}
+                  color={"rgba(255, 255, 255, 0.45)"}
+                />
+              </TouchableOpacity>
+            </View>
+
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("SingUp")}
+              style={styles.btnLogin}
+              onPress={() => this.login()}
             >
-              <Text style={styles.textRegbtn}>Registrate aqui</Text>
+              <Text style={styles.text}> Login </Text>
             </TouchableOpacity>
-          </View>
 
-          <View>
-            <Modal visible={this.state.loading} width={150} height={80}>
-              <ModalContent>
-                <ActivityIndicator size="large" color="#000000" />
-              </ModalContent>
-            </Modal>
-          </View>
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    );
+            <View style={styles.regContainer}>
+              <Text style={styles.textReg}>¿No tienes tu cuenta aun?</Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("SingUp")}
+              >
+                <Text style={styles.textRegbtn}>Registrate aqui</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <Modal visible={this.state.loading} width={150} height={80}>
+                <ModalContent>
+                  <ActivityIndicator size="large" color="#000000" />
+                </ModalContent>
+              </Modal>
+            </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      );
+    }
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    alignItems: 'center',
-    justifyContent: 'center'
+  container: {
+    alignItems: "center",
+    justifyContent: "center"
   },
   backgroundContainer: {
     flex: 1,
