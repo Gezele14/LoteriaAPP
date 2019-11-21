@@ -42,6 +42,7 @@ export default class Spots extends React.Component {
 
     this.state = {
       games: false,
+      nameLocal: "",
       juegoSel: "Nacional",
       numeroJuego: "",
       cantJuego: "",
@@ -77,7 +78,9 @@ export default class Spots extends React.Component {
           " colones al número " +
           this.state.numeroJuego +
           " de la loteria " +
-          this.state.juegoSel
+          this.state.juegoSel +
+          " en " +
+          this.state.nameLocal
       );
     }
   };
@@ -90,15 +93,27 @@ export default class Spots extends React.Component {
             <Text style={styles.text}> Puntos de Venta </Text>
           </View>
           <ScrollView>
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "El Chino", games: true })
+              }
+            >
               <Spot name={"El Chino"} location={"Cartago"} uri={imgURI} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Tiempos Maria", games: true })
+              }
+            >
               <Spot name={"Tiempos Maria"} location={"Tejar"} uri={imgURI} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Divino Niño", games: true })
+              }
+            >
               <Spot
                 name={"Divino Niño"}
                 location={"Despamparados"}
@@ -106,11 +121,19 @@ export default class Spots extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Tiempos Rosa", games: true })
+              }
+            >
               <Spot name={"Tiempos Rosa"} location={"San José"} uri={imgURI} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Tiempos Miguel", games: true })
+              }
+            >
               <Spot
                 name={"Tiempos Miguel"}
                 location={"Mercado Central"}
@@ -118,11 +141,19 @@ export default class Spots extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Tiempos 80%", games: true })
+              }
+            >
               <Spot name={"Tiempos 80%"} location={"San José"} uri={imgURI} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Super Rodríguez", games: true })
+              }
+            >
               <Spot
                 name={"Super Rodríguez"}
                 location={"Cartago"}
@@ -130,7 +161,11 @@ export default class Spots extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.setState({ games: true })}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ nameLocal: "Tiempos", games: true })
+              }
+            >
               <Spot
                 name={"Tiempos"}
                 location={"Mercado Cartago"}

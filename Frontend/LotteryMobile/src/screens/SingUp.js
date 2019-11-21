@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import * as FileSystem from "expo-file-system";
 
 import Colors from "../constants/Colors";
 import bgimage from "../assets/images/background2.png";
@@ -36,6 +37,45 @@ export default class SingUp extends React.Component {
 
   static navigationOptions = {
     header: null
+  };
+
+  SingUp = () => {
+    if (
+      this.state.nombre == "" ||
+      this.state.pApellido == "" ||
+      this.state.sApellido == "" ||
+      this.state.ced == "" ||
+      this.state.pass == "" ||
+      this.state.passConf == ""
+    ) {
+      ToastAndroid.show(
+        "Por favor rellene todos los datos",
+        ToastAndroid.SHORT
+      );
+    } else {
+      if (this.state.ced.length != 9) {
+        ToastAndroid.show("Digite una cedula válida", ToastAndroid.SHORT);
+      } else if (this.state.pass != this.state.passConf) {
+        ToastAndroid.show("Las contraseñas no coinciden", ToastAndroid.SHORT);
+      } else {
+        ToastAndroid.show("Bienvenido al app Loteria", ToastAndroid.SHORT);
+        this.props.navigation.navigate("Profile");
+      }
+    }
+  };
+
+  saveUsrData = () => {
+    let data = {
+      nombre:
+        this.state.nombre +
+        " " +
+        this.state.pApellido +
+        " " +
+        this.state.sApellido,
+      cedula: this.state.ced,
+      pass: this.state.pass,
+      saldo: 0
+    };
   };
 
   render() {
@@ -118,11 +158,7 @@ export default class SingUp extends React.Component {
                 <TouchableOpacity
                   style={styles.btn}
                   onPress={() => {
-                    this.props.navigation.navigate("Profile");
-                    ToastAndroid.show(
-                      "Bienvenido al app Loteria",
-                      ToastAndroid.SHORT
-                    );
+                    this.SingUp();
                   }}
                 >
                   <Text style={styles.btnText}> Aceptar </Text>

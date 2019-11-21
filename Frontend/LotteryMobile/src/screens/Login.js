@@ -40,7 +40,20 @@ export default class Login extends React.Component {
   }
 
   login = () => {
-    this.props.navigation.navigate("Profile");
+    let cedula = "304960671";
+    let pass = "gera1234";
+
+    if (this.state.ced == "" || this.state.pass == "") {
+      ToastAndroid.show(
+        "Por favor rellene todos los datos",
+        ToastAndroid.SHORT
+      );
+    } else if (this.state.ced == cedula && this.state.pass == pass) {
+      this.props.navigation.navigate("Profile");
+      ToastAndroid.show("Bienvenido", ToastAndroid.SHORT);
+    } else {
+      ToastAndroid.show("Cedula o contraseña no coinciden", ToastAndroid.SHORT);
+    }
   };
 
   searchUsr = () => {
