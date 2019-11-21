@@ -249,7 +249,7 @@ export default class Spots extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
+    alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
   },
@@ -273,14 +273,17 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    fontSize: 40
+    fontSize: 25,
+    marginBottom: 8,
+    color: "#FFFFFF"
   },
   titleContainer: {
+    height: 70,
+    justifyContent: "flex-end",
     marginBottom: 5,
-    width: WIDTH - 20,
+    width: WIDTH,
     alignItems: "center",
-    borderBottomColor: "#000000",
-    borderBottomWidth: 3
+    backgroundColor: "#415557"
   },
   buttonContainer: {
     flexDirection: "row",

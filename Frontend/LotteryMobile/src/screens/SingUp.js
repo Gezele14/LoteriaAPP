@@ -44,7 +44,7 @@ export default class SingUp extends React.Component {
         <KeyboardAvoidingView
           behavior="padding"
           enabled
-          keyboardVerticalOffset = {10}
+          keyboardVerticalOffset={10}
         >
           <ScrollView>
             <View style={styles.container}>
@@ -117,19 +117,24 @@ export default class SingUp extends React.Component {
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
                   style={styles.btn}
-                  onPress={() => ToastAndroid.show("Aceptar",ToastAndroid.SHORT)}
+                  onPress={() => {
+                    this.props.navigation.navigate("Profile");
+                    ToastAndroid.show(
+                      "Bienvenido al app Loteria",
+                      ToastAndroid.SHORT
+                    );
+                  }}
                 >
                   <Text style={styles.btnText}> Aceptar </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.btn}
-                  onPress={() => ToastAndroid.show("Cancelar",ToastAndroid.SHORT)}
+                  onPress={() => this.props.navigation.navigate("Login")}
                 >
                   <Text style={styles.btnText}> Cancelar </Text>
                 </TouchableOpacity>
               </View>
-
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -159,13 +164,13 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 15,
     fontSize: 16,
-    paddingLeft: 45,
+    paddingLeft: 20,
     backgroundColor: "rgba(0,0,0, 0.09)",
     color: "rgba(0,0,0,0.9)",
     marginHorizontal: 25
   },
   text: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 40
   },
   titleContainer: {
@@ -186,11 +191,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     marginLeft: 10,
-    marginRight:10
+    marginRight: 10
   },
-  btnText:{
+  btnText: {
     color: "#ffffff",
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: "center"
   }
 });

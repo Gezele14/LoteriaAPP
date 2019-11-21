@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 5,
     flexDirection: "row",
+    borderRadius: 15,
+    backgroundColor: "rgba(0,0,0,0.33)",
     borderBottomWidth: 2,
     borderBottomColor: "#9c9c9c",
     width: WIDTH -30,

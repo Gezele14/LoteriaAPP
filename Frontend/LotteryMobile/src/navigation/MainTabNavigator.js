@@ -2,18 +2,51 @@ import React from "react";
 import { Platform } from "react-native";
 import {
   createStackNavigator,
+  createSwitchNavigator,
+  createMaterialTopTabNavigator,
   createBottomTabNavigator
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
+
+import Login from "../screens/Login";
+import SingUp from "../screens/SingUp";
 import Spots from "../screens/Spots";
 import Profile from "../screens/Profile";
 import Historial from "../screens/Historial";
+import Welcome from "../screens/Welcome"
 
 const config = Platform.select({
   web: { headerMode: "screen" },
   default: {}
 });
+
+//==================================================================================
+//--------------------------------------Main---------------------------------------
+//==================================================================================
+const MainStack = createStackNavigator(
+  {
+    Welcome: Welcome,
+    Login: Login,
+    SingUp: SingUp,
+  },
+  {
+    defaultNavigationOptions: {
+      backgroundColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "normal"
+      }
+    }
+  },
+  config
+);
+
+MainStack.navigationOptions = {
+  tabBarLabel: "Lugares",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"ios-pin"} />
+};
+
+MainStack.path = "";
 
 //==================================================================================
 //--------------------------------------Spots---------------------------------------
@@ -67,7 +100,7 @@ ProfileStack.path = "";
 //-------------------------------------Historial------------------------------------
 //==================================================================================
 const HistorialStack = createStackNavigator(
-  { Profile: Profile },
+  { Historial: Historial },
   {
     defaultNavigationOptions: {
       backgroundColor: "#fff",
@@ -80,7 +113,7 @@ const HistorialStack = createStackNavigator(
 HistorialStack.navigationOptions = {
   tabBarLabel: "Historial",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={"ios-time"} />
+    <TabBarIcon focused={focused} name={"ios-stats"} />
   )
 };
 
@@ -90,15 +123,41 @@ HistorialStack.path = "";
 //-------------------------------Barra de estado------------------------------------
 //==================================================================================
 
-const tabNavigator = createBottomTabNavigator({
-  SpotStack,
-  ProfileStack,
-  HistorialStack
-});
+const tabNavigator = createMaterialTopTabNavigator(
+  {
+    SpotStack,
+    ProfileStack,
+    HistorialStack
+  },
+  {
+    initialRouteName: "ProfileStack",
+    animationEnabled: true,
+    tabBarOptions: {
+      showLabel: false,
+      showIcon: true,
+      
+      style:{
+        backgroundColor: "#415557",
+      },
+      indicatorStyle : {
+        backgroundColor: "#FFFFFF"
+      }
+    },
+    tabBarPosition: 'bottom',
+    
+  }
+    
+);
 
-tabNavigator.navigationOptions = {
-  backgroundColor: "#a3a0a0"
-};
 tabNavigator.path = "";
 
-export default tabNavigator;
+
+
+//====================================================================
+const MySwitchNavigator = createSwitchNavigator(
+  {
+    MainStack,
+    tabNavigator
+  }
+)
+export default MySwitchNavigator;
